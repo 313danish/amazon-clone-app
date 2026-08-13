@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Request Response Cycle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            padding-top: 80px;
+        }
+        .container {
+            background-color: white;
+            width: 500px;
+            margin: auto;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+        h1 {
+            color: #2874f0;
+        }
+        p {
+            font-size: 18px;
+        }
+        button {
+            background-color: #2874f0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1255c7;
+        }
+        #result {
+            margin-top: 25px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HTTP Request–Response Cycle</h1>
+        <p>
+            Click the button to send a request to Flipkart.
+        </p>
+        <button onclick="sendRequest()">
+            Send HTTP Request
+        </button>
+        <div id="result">
+            Waiting for request...
+        </div>
+    </div>
+    <script>
+       function sendRequest() {
+    document.getElementById("result").innerHTML =
+        "Sending HTTP Request...";
+    fetch("https://jsonplaceholder.typicode.com/posts/1")
+        .then(response => {
+            console.log("HTTP Status Code:", response.status);
+            console.log("Response Headers:", [...response.headers]);
+            document.getElementById("result").innerHTML =
+                "HTTP Response Received!<br>" +
+                "Status Code: " + response.status;
+            return response.json();
+        })
+        .then(data => {
+            console.log("Response Data:", data);
+            document.getElementById("result").innerHTML +=
+                "<br>Response Data: " + JSON.stringify(data);
+        })
+        .catch(error => {
+            console.error("Request Error:", error);
+            document.getElementById("result").innerHTML =
+                "Request failed. Check the Network tab.";
+        });
+}
+            document.getElementById("result").innerHTML =
+                "Sending HTTP Request...";
+            fetch("https://www.google.com/")
+                .then(response => {
+                    console.log("HTTP Status Code:", response.status);
+                    console.log("Response Headers:", response.headers);
+                    document.getElementById("result").innerHTML =
+                        "HTTP Response Received!<br>" +
+                        "Status Code: " + response.status;
+                    return response.text();
+                })
+                .then(data => {
+                    console.log("Response Data:", data);
+                })
+                .catch(error => {
+                    console.error("Request Error:", error);
+
+                    document.getElementById("result").innerHTML =
+                        "Request failed. Check the Network tab.";
+                });
+    </script>
+</body>
+</html>
