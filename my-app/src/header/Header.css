@@ -3,7 +3,6 @@
     width: 100vw;
     background-color: rgba(55, 71, 90, 1);
 }
-
 .Header span {
     float: left;
     color: #f2f2f2;
@@ -12,8 +11,13 @@
     font-size: 17px;
     cursor: pointer;
 }
-
+.Header a {
+    color: #f2f2f2;
+    text-decoration: none;
+}
 .Header span:hover {
     background-color: #ddd;
+}
+.Header span:hover a {
     color: black;
 }

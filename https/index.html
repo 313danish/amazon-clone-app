@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,25 +57,27 @@
         </div>
     </div>
     <script>
-       function sendRequest() {
+ function sendRequest() {
     document.getElementById("result").innerHTML =
         "Sending HTTP Request...";
+
     fetch("https://jsonplaceholder.typicode.com/posts/1")
         .then(response => {
             console.log("HTTP Status Code:", response.status);
             console.log("Response Headers:", [...response.headers]);
+
             document.getElementById("result").innerHTML =
                 "HTTP Response Received!<br>" +
                 "Status Code: " + response.status;
+
             return response.json();
         })
         .then(data => {
             console.log("Response Data:", data);
-            document.getElementById("result").innerHTML +=
-                "<br>Response Data: " + JSON.stringify(data);
         })
         .catch(error => {
             console.error("Request Error:", error);
+
             document.getElementById("result").innerHTML =
                 "Request failed. Check the Network tab.";
         });
