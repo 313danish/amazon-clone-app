@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.css'
 import { Link } from 'react-router'
-import Cart from '../pages/Card'
+// import Cart from '../pages/Card'
 
 function Header() {
   return (
@@ -16,16 +16,10 @@ function Header() {
         <Link to="/products">Products</Link>
       </span>
       <span>
-        <Link to="/account">Account1</Link>
+        <Link to="/account">Account</Link>
       </span>
       <span>
-        <Link to="/account">Account2</Link>
-      </span>
-      <span>
-        <Link to="/cart">Cart1</Link>
-      </span>
-       <span>
-        <Link to="/cart">Cart2</Link>
+        <Link to="/cart">Cart</Link>
       </span>
     </div>
   )

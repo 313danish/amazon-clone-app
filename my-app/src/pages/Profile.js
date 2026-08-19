@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { useParams } from 'react-router';
 
 function Profile() {
+  const { id } = useParams();
+
   return (
-    <div>Profile</div>
-  )
+    <div>
+      <h1>Profile Page</h1>
+      <p>User ID: {id}</p>
+    </div>
+  );
 }
 
-export default Profile
+export default Profile;
