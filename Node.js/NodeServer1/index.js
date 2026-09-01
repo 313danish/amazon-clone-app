@@ -23,10 +23,14 @@
 const express = require('express');
 
 
+// import body-parser module to parse the request body
+const bodyParser = require('body-parser');
+
 
 // creating an express app
 
 const app = express();
+
 
 // simple GET route 
 // app.get('/rvu-data', (req, res) => {
@@ -174,6 +178,42 @@ app.get('/download-logo', (req, res) => {
     res.download(__dirname + '/instaLogo.jpg');
            
 });
+
+
+
+app.get('/register', (req, res) => {
+    res.sendFile(__dirname + '/register.html');
+});
+
+
+
+// app.get('/api/register', (req, res) => {
+//     res.sendFile(__dirname + '/About.html');
+// });
+
+
+
+// here we are posting the value X and Y regard less of the value entered in the input field of the form in register.
+// html file. We can get the value entered in the input field by using req.body.firstName and req.body.lastName.
+//  But to do that we need to use body-parser middleware. 
+
+// middleware 
+app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+
+
+app.post('/api/register', (req, res) => {
+    // const firstName ='X' , lastName = 'Y';
+    // res.send(`Thank you for registering, ${firstName} ${lastName}!`);
+    console.log(req.body);
+    res.send(`Thank you for registering, ${req.body.firstName} ${req.body.lastName}!`);
+
+
+});
+ 
+
+
+
 // Attaching the server to a port
 
 app.listen(3000, () => {
