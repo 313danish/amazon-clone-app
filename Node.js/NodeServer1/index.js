@@ -4,12 +4,14 @@
 // It also provides a set of pre-built functionalities that can be used to build the application.
 
 // frameworks in node js are express.js, koa.js, hapi.js, sails.js, nest.js etc.
-
+ 
+ 
+ 
 // introduce free AP 
 // i.e https://reqres.in/api/users
 
 
-
+   
 // first server in Node.js using Express.js framework
 // first we need to initialize a new Node.js project by running the following command in the terminal:
 
@@ -25,12 +27,12 @@ const express = require('express');
 
 // import body-parser module to parse the request body
 const bodyParser = require('body-parser');
-
+ 
 
 // creating an express app
 
 const app = express();
-
+app.use(bodyParser.json());
 
 // simple GET route 
 // app.get('/rvu-data', (req, res) => {
@@ -46,13 +48,17 @@ const app = express();
 // '/' is the root route of the server. When a GET request is made to this route, 
 // the server responds with 'Hello World! This is my first Node.js server.'  
   
-// (req, res) => { ... } is a callback function that takes two parameters: req (the request object) and res (the response object). The res.send() method sends a response back to the client.
+// (req, res) => { ... } is a callback function that takes two parameters: req (the request object) and res (the response object). 
+// The res.send() method sends a response back to the client.
 // send is the method that sends the response back to the client. 
 // It can send a string, an object, or an array as a response. 
 // In this case, we are sending a string 'Hello World! This is my first Node.js server.' as a response.
 
 
-// now  copy data from https://reqres.in/api/users and paste it in the above code and send it back to the client when a GET request is made to the '/rvu-data' route of the server. The data is an object with three properties: name, age, and email. The res.json() method sends the object as a JSON response back to the client.
+// now  copy data from https://reqres.in/api/users and paste it in the above code and send it back to 
+// the client when a GET request is made to the '/rvu-data' route of the server.
+//  The data is an object with three properties: name, age, and email.
+//  The res.json() method sends the object as a JSON response back to the client.
 
 app.get('/users', (req, res) => {
     const users_data = [
@@ -199,7 +205,7 @@ app.get('/register', (req, res) => {
 
 // middleware 
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+
 
 
 app.post('/api/register', (req, res) => {
@@ -207,12 +213,7 @@ app.post('/api/register', (req, res) => {
     // res.send(`Thank you for registering, ${firstName} ${lastName}!`);
     console.log(req.body);
     res.send(`Thank you for registering, ${req.body.firstName} ${req.body.lastName}!`);
-
-
-});
- 
-
-
+}); 
 
 // Attaching the server to a port
 
@@ -227,7 +228,6 @@ app.listen(3000, () => {
 
 
 /*
-
 ## HTTP Methods: (REST APIs)
 - GET: To retrieve data from the server
 - POST: To send data to the server
@@ -251,7 +251,6 @@ app.listen(3000, () => {
 // });
 
 
-// do this and refresh and check it wont wotk then do restart the server and check it will work now because we have added a new route to the server and we need to restart the server to see the changes.
-
-
+// do this and refresh and check it wont wotk then do restart the server and check 
+// it will work now because we have added a new route to the server and we need to restart the server to see the changes.
 // nodemon 
