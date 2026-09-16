@@ -86,6 +86,25 @@ app.listen(3000, () => {
 
 // node index.js
 
+app.get('/register', (req, res) => {
+    res.sendFile(__dirname + '/register.html');
+});
+
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.post('/api/register', (req, res) => {
+
+    console.log(req.body);
+
+    res.send(`Thank you for registering, ${req.body.firstName} ${req.body.lastName}!`);
+
+});
+
+
 
 /*
 HTTP Methods 

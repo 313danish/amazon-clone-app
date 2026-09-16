@@ -59,6 +59,15 @@ app.use(bodyParser.json());
 // the client when a GET request is made to the '/rvu-data' route of the server.
 //  The data is an object with three properties: name, age, and email.
 //  The res.json() method sends the object as a JSON response back to the client.
+app.get('/', (req, res) => {
+    const danishData = {
+        name: 'Danish',
+        age: 25,
+        email: ' '
+    };
+    res.json(danishData);
+    // res.send('Hello World! This is my first Node.js server.');
+})
 
 app.get('/users', (req, res) => {
     const users_data = [
@@ -112,9 +121,9 @@ app.get('/users', (req, res) => {
 
 //  create html file to add UI for routes and reder here
 
-app.get('/about', (req, res) => {
-    res.sendFile(__dirname + '/About.html');
-})   
+// app.get('/about', (req, res) => {
+//     res.sendFile(__dirname + '/About.html');
+// })   
 
 //__dirname is a global variable in Node.js that returns the directory name of the current module. 
 // It is used to get the absolute path of the file. In this case, we are using it to get the absolute
@@ -193,9 +202,9 @@ app.get('/register', (req, res) => {
 
 
 
-// app.get('/api/register', (req, res) => {
-//     res.sendFile(__dirname + '/About.html');
-// });
+app.get('/api/register', (req, res) => {
+    res.sendFile(__dirname + '/About.html');
+});
 
 
 
@@ -249,6 +258,7 @@ app.listen(3000, () => {
 //     };
 //     res.json(danishData);
 // });
+  
 
 
 // do this and refresh and check it wont wotk then do restart the server and check 
