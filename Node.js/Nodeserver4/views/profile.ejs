@@ -7,16 +7,16 @@
 </head>
 <body>
     <p><%= firstName %>
-    <% if (premium) { %>
-        <span style="color: gold;">&#9733; Premium User</span>  
-    <% } %>
+      <% if(premium) { %>
+        <span style="color: gold;">&#9733;</span>   
+   <% } %>
     </p>
    <img src="<%= profileImage %>" alt="profile image" width="500" height="300">
    <h1><%= email %></h1> 
    <ul>
-     <% hobbies.forEach(hobby => { %>
-       <li><%= hobby %></li>
-     <% }); %>  
+    <% hobbies.forEach(function(hobby) { %>
+        <li><%= hobby %></li>
+    <% }); %>
    </ul>
 </body>
 </body>
