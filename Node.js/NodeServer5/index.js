@@ -93,60 +93,124 @@ const Child = mongoose.model('Child', {
     Phone: Number,
 });
 
-// app.get('/add', async (req, res) => {
+
+app.get('/children', async (req,res) =>{
+    try{
+        const children = await Child.find();
+        res.json({
+            status:'SUCCESS',
+            message:'Data fetched successfully.',
+            data:children,
+        })
+    }
+    catch(err){
+          res.json({
+            status:'FAILED',
+            message:'SOMETHING WENT WRONG.'
+        })
+    }
+});
+
+app.post('/children', async (req,res) =>{
+    try{
+        const {firstName,lastName,email,phone } = req.body;
+        const children = await Child.create({firstName,lastName,email,phone });
+        res.json({
+            status:'SUCCESS',
+            message:'Data instered successfully.',
+        })
+    }
+    catch(err){
+          res.json({
+            status:'FAILED',
+            message:'SOMETHING WENT WRONG.'
+        })
+    }
+});
+
+
+app.patch('/children/:id', async (req,res) =>{
+    try{
+          const { id } = req.params;
+        const { firstName, lastName, email, Phone } = req.body || {};
+        const updatedChild = await Child.findByIdAndUpdate(
+            id,
+            {
+                firstName,
+                lastName,
+                email,
+                Phone
+            });
+        res.json({
+            status:'SUCCESS',
+            message:'Data updated successfully.',
+        })
+    }
+    catch(err){
+          res.json({
+            status:'FAILED',
+            message:'SOMETHING WENT WRONG.'
+        })
+    }
+});
+
+// app.patch('/children/:id', async (req, res) => {
 //     try {
-//         //  for one entry 
-//         // const newChild1 = await Child.create({
-//         //     firstName: "Rahul",
-//         //     lastName: "Sharma",
-//         //     Phone: 9876543210
-//         // });
-//         //  for more than one entry 
-//         const addedChildren = await Child.insertMany([
-//             { firstName: "Rahul", lastName: "Sharma", Phone: 9876543210 },
-//             { firstName: "Danish", lastName: "Khan", Phone: 9876543310 },
-//             { firstName: "Sonu", lastName: "Mon", Phone:9165497878 },
-//         ]);
-//         res.status(201).json({
-//             message: "Record added successfully!",
-//             data: addedChildren
+//         const { id } = req.params;
+//         const { firstName, lastName, email, Phone } = req.body || {};
+//         const updatedChild = await Child.findByIdAndUpdate(
+//             id,
+//             {
+//                 firstName,
+//                 lastName,
+//                 email,
+//                 Phone
+//             });
+//         res.json({
+//             status: 'SUCCESS',
+//             message: 'Child entry updated successfully.',
+//             data: updatedChild
 //         });
-//     } catch (err) {
-//         res.status(500).json({ error: err.message });
+//     } catch (error) {
+//         console.log("ERROR:", error);
+//         res.status(500).json({
+//             status: 'FAILED',
+//             message: error.message
+//         });
 //     }
 // });
 
-app.get('/children', async (req, res) => {
-    try {
-        const children = await Child.find({})
-        res.json({
-            status: 'SUCCESS',
-            data: children
-        })
-    } catch (error) {
-        res.json({
-            status: 'FAILED',
-            message: 'Something went wrong'
-        })
-    }
 
-});
+// app.get('/children', async (req, res) => {
+//     try {
+//         const children = await Child.find({})
+//         res.json({
+//             status: 'SUCCESS',
+//             data: children
+//         })
+//     } catch (error) {
+//         res.json({
+//             status: 'FAILED',
+//             message: 'Something went wrong'
+//         })
+//     }
+// });
 
-app.post('/children', async (req, res) => {
-    try {
-        const { firstName, lastName, email, Phone } = req.body;
-        await Child.create({ firstName, lastName, email, Phone })
-        res.json({
-            status: 'Success',
-            message: 'Child created successfull.',
-        })
-    } catch (error) {
-        res.json({
-            status: 'Failed',
-            message: 'Something went wrong.',
-        })
-    }
-})
+// app.post('/children', async (req, res) => {
+//     try {
+//         const { firstName, lastName, email, Phone } = req.body;
+//         await Child.create({ firstName, lastName, email, Phone })
+//         res.json({
+//             status: 'Success',
+//             message: 'Child created successfull.',
+//         })
+//     } catch (error) {
+//         res.json({
+//             status: 'Failed',
+//             message: 'Something went wrong.',
+//         })
+//     }
+// })
 
 // app.patch('/children/:id', async (req, res) => {
 //     try {
@@ -165,55 +229,57 @@ app.post('/children', async (req, res) => {
 //     }
 // })
 
-app.patch('/children/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { firstName, lastName, email, Phone } = req.body || {};
-        const updatedChild = await Child.findByIdAndUpdate(
-            id,
-            {
-                firstName,
-                lastName,
-                email,
-                Phone
-            }
-        );
-        console.log("UPDATED:", updatedChild);
-        res.json({
-            status: 'SUCCESS',
-            message: 'Child entry updated successfully.',
-            data: updatedChild
-        });
-    } catch (error) {
-        console.log("ERROR:", error);
-        res.status(500).json({
-            status: 'FAILED',
-            message: error.message
-        });
-    }
-});
+// app.patch('/children/:id', async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const { firstName, lastName, email, Phone } = req.body || {};
+//         const updatedChild = await Child.findByIdAndUpdate(
+//             id,
+//             {
+//                 firstName,
+//                 lastName,
+//                 email,
+//                 Phone
+//             });
+//         res.json({
+//             status: 'SUCCESS',
+//             message: 'Child entry updated successfully.',
+//             data: updatedChild
+//         });
+//     } catch (error) {
+//         console.log("ERROR:", error);
+//         res.status(500).json({
+//             status: 'FAILED',
+//             message: error.message
+//         });
+//     }
+// });
 
-app.delete('/children/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const updatedChild = await Child.findByIdAndDelete(id);
-        res.json({
-            status: 'SUCCESS',
-            message: 'Child entry Deleted successfully.',
-            data: updatedChild
-        });
-    } catch (error) {
-        console.log("ERROR:", error);
-        res.status(500).json({
-            status: 'FAILED',
-            message: error.message
-        });
-    }
-});
+// app.delete('/children/:id', async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const updatedChild = await Child.findByIdAndDelete(id);
+//         res.json({
+//             status: 'SUCCESS',
+//             message: 'Child entry Deleted successfully.',
+//             data: updatedChild
+//         });
+//     } catch (error) {
+//         console.log("ERROR:", error);
+//         res.status(500).json({
+//             status: 'FAILED',
+//             message: error.message
+//         });
+//     }
+// });
+
+
+
 
 app.get('/', (req, res) => {
     res.json({ message: 'Hello World' });
 });
+
 const PORT = process.env.PORT;
 
 app.listen(PORT, () => {

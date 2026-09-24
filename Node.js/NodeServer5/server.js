@@ -33,7 +33,7 @@ const Boy = mongoose.model('Boy',
 );
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT ;
 
 // Connect to MongoDB first, then start the server on success
 mongoose.connect(process.env.MONGODB_URL)
